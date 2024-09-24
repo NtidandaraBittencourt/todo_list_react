@@ -1,0 +1,47 @@
+@use '@react-md/theme/dist/color-palette' as color;
+@use 'react-md/dist/everything' as * with
+(
+  $rmd-theme-light: true,
+  $rmd-theme-primary: color.$rmd-teal-500,
+  $rmd-theme-secondary: color.$rmd-pink-a-200
+);
+body {
+  background-color: #f7e7ed;
+}
+
+.defaultSecondary {
+  background-color: $rmd-theme-secondary;
+  color: $rmd-theme-on-secondary;
+}
+
+.container {
+    @include rmd-utils-optional-css-modules('.rmd-list', true, false) {
+      @include rmd-theme-dark-elevation(6, true);
+    }
+  
+    align-items:center;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    flex-direction: column;
+  
+    .rmd-list {  
+      margin: 1rem;
+      max-width: 30rem;
+      width: 100%;
+
+      .rmd-list-item {
+        border-radius: 10px;
+        background-color: #eca5bf;
+        color: rgb(100, 98, 98);
+        font-weight: 800;
+        font-size: 18px;
+        margin-bottom: 10px;
+      }
+      .rmd-list-item:hover {
+        background-color: #df769d;
+        color: rgb(221, 218, 218);
+
+      }
+    }
+  }
