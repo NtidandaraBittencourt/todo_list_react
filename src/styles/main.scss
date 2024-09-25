@@ -1,20 +1,16 @@
+// @use "react-md" as *;
 @use '@react-md/theme/dist/color-palette' as color;
 @use 'react-md/dist/everything' as * with
 (
   $rmd-theme-light: true,
-  $rmd-theme-primary: color.$rmd-teal-500,
+  $rmd-theme-primary: color.$rmd-pink-50,
   $rmd-theme-secondary: color.$rmd-pink-a-200,
-  $rmd-theme-on-secondary: color.$rmd-blue-grey-400
-
-
+  $rmd-theme-on-primary: color.$rmd-pink-300,
+  $rmd-theme-on-secondary: color.$rmd-blue-grey-800
 );
-body {
-  background-color: #f7e7ed;
-}
 
-.defaultSecondary {
-  background-color: $rmd-theme-secondary;
-  color: $rmd-theme-on-secondary;
+body {
+  background-color: $rmd-theme-primary;
 }
 
 .container {
@@ -35,17 +31,20 @@ body {
 
       .rmd-list-item {
         border-radius: 10px;
-        background-color: #eca5bf;
-        color: rgb(100, 98, 98);
+        background-color: $rmd-theme-on-primary;
+        color: $rmd-theme-on-secondary;
         font-weight: 800;
         font-size: 18px;
         margin-bottom: 10px;
+
+        .strikethrough {
+          text-decoration: line-through;
+        }
       }
       .rmd-list-item:hover {
-        background-color: #df769d;
-        color: rgb(221, 218, 218);
-
-      }
+        background-color: $rmd-theme-on-primary;
+        color: $rmd-theme-primary;
+      }      
     }
   }
 
@@ -62,3 +61,5 @@ body {
     max-width: 40rem;
     width: 60%;
   }
+
+@include react-md-utils;

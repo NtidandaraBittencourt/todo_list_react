@@ -6,7 +6,7 @@ import {
 import { Button  } from 'react-md';
 
 
-const InputTodo = ({ newTodo, onInputChange, onAddTodo }) => {
+const FormTodo = ({ newTodo, onInputChange, onAddTodo }) => {
 
   return (
     <Form className="form-todo">
@@ -15,10 +15,12 @@ const InputTodo = ({ newTodo, onInputChange, onAddTodo }) => {
         value={newTodo}
         onChange={(e) => onInputChange(e.target.value)}
         placeholder="New Todo"
+        theme='outline'
+        
       />
       <Button onClick={onAddTodo} theme="secondary" themeType="contained">Add Todo</Button>
     </Form>
   )
 }
 
-export default InputTodo;
+export default FormTodo;

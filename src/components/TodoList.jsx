@@ -24,7 +24,6 @@ const TodoList = ({ todos, deleteTodo, toggleTodo, message }) => {
             todo={todo}
             deleteTodo={deleteTodo}
             toggleTodo={toggleTodo}
-            class="defaultSecondary"
           />
         ))}
       </List>

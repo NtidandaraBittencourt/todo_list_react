@@ -8,18 +8,20 @@ const TodoItem = ({ todo, deleteTodo, toggleTodo }) => {
   return (
 
     <ListItem
-      id="two-line-item-0"
-      leftAddon={<Checkbox
+      leftAddon={
+        <Checkbox
         id="textarea-animate"
         checked={todo.status}
         onChange={() => toggleTodo(todo.id, todo.status)}
-      />}
+        theme="primary"
+        />
+      }
       leftAddonType="avatar"
       rightAddon={
         <Button
         id="icon-button-1"
         buttonType="icon"
-        theme="secondary"
+        theme="primary"
         aria-label="Favorite"
         onClick={() => deleteTodo(todo.id)}
       >
@@ -29,7 +31,9 @@ const TodoItem = ({ todo, deleteTodo, toggleTodo }) => {
       rightAddonPosition="top"
     >
       
-      {todo.task}
+      <span className={todo.status ? 'strikethrough' : ''}>
+        {todo.task}
+      </span>
       
     </ListItem>
   );

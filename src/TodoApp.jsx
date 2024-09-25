@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { db } from './firebase';
 import { collection, getDocs, addDoc, doc, deleteDoc, updateDoc  } from 'firebase/firestore';
 import TodoList from './components/TodoList';
-import InputTodo from './components/InputTodo';
+import FormTodo from './components/FormTodo';
 import { Divider } from "@react-md/divider";
 
 class TodoApp extends Component {
@@ -63,7 +63,7 @@ class TodoApp extends Component {
     return (
       <div className="container">
         <h1>Todo List</h1>
-        <InputTodo newTodo={this.state.newTodo} onInputChange={this.handleInputChange} onAddTodo={this.addTodo} />
+        <FormTodo newTodo={this.state.newTodo} onInputChange={this.handleInputChange} onAddTodo={this.addTodo} />
         <Divider className='divider'/>
       
         <TodoList
