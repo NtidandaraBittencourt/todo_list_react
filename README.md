@@ -43,6 +43,7 @@ src/
 ├── utils/
 │   └── firebase.js
 └── ... (outros arquivos e pastas)
+```
 
 ## 🚀 Como Rodar o Projeto
 
