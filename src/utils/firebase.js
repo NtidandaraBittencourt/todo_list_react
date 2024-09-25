@@ -1,6 +1,5 @@
 import { initializeApp } from 'firebase/app';
-import { getFirestore } from 'firebase/firestore';
-
+import { getFirestore, connectFirestoreEmulator  } from 'firebase/firestore';
 
 const firebaseConfig = {
     apiKey: "AIzaSyBuZVv-zSy9YWJxG4gPDQUTlxY_m2Uq1qo",

@@ -2,7 +2,6 @@ import { render, screen, fireEvent } from '@testing-library/react';
 import TodoItem from '../components/TodoItem';
 import '@testing-library/jest-dom';
 
-// Mock data
 const mockTodo = {
   id: 1,
   task: 'Testar componente TodoItem',
