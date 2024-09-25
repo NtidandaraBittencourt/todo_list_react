@@ -1,77 +1,63 @@
 import React from 'react';
-import { render, screen, fireEvent } from '@testing-library/react';
-import { act } from 'react';
+import { render, screen, fireEvent, waitFor  } from '@testing-library/react';
 import '@testing-library/jest-dom';
+import userEvent from '@testing-library/user-event';
 import FormTodo from '../components/FormTodo';
 
 describe('FormTodo Component', () => {
-  test('renders input and submit button', () => {
-    render(<FormTodo onAddTodo={jest.fn()} />);
+  let mockOnAddTodo;
+
+  beforeEach(() => {
+    mockOnAddTodo = jest.fn();
+  });
+
+
+  test('renderiza o campo de entrada e o botão', () => {
+    render(<FormTodo onAddTodo={mockOnAddTodo} />);
 
     expect(screen.getByPlaceholderText('New Todo')).toBeInTheDocument();
     expect(screen.getByRole('button', { name: /add todo/i })).toBeInTheDocument();
   });
 
-  test('shows validation error if submitted without text', async () => {
-    render(<FormTodo onAddTodo={jest.fn()} />);
+  test('mostra mensagem de erro quando o campo é submetido vazio', async () => {
+    render(<FormTodo onAddTodo={mockOnAddTodo} />);
 
     fireEvent.click(screen.getByRole('button', { name: /add todo/i }));
 
     expect(await screen.findByText('Todo is required!')).toBeInTheDocument();
+
+    expect(mockOnAddTodo).not.toHaveBeenCalled();
   });
 
   test('renders FormTodo component', () => {
-    render(<FormTodo onAddTodo={jest.fn()} />);
+    render(<FormTodo onAddTodo={mockOnAddTodo} />);
   
     const input = screen.getByRole('textbox');
     expect(input).toBeInTheDocument();
   });
 
-//   test('calls onAddTodo when form is submitted with valid input', () => {
-//     const mockOnAddTodo = jest.fn();
-  
-//     // Renderiza o componente
-//     render(<FormTodo onAddTodo={mockOnAddTodo} />);
-  
-//     // Seleciona o input diretamente via querySelector
-//     const input = document.querySelector('input[name="newTodo"]');
-  
-//     // Simula digitação no campo de texto
-//     fireEvent.change(input, {
-//       target: { value: 'Learn Testing' },
-//     });
-  
-//     // Simula clique no botão de submit
-//     const submitButton = screen.getByText(/Add Todo/i);
-//     fireEvent.click(submitButton);
-  
-//     // Verifica se onAddTodo foi chamado corretamente
-//     expect(mockOnAddTodo).toHaveBeenCalledWith('Learn Testing');
-//   });
+  test('submete o formulário corretamente quando o campo é preenchido', async () => {
+    render(<FormTodo onAddTodo={mockOnAddTodo} />);
 
+    userEvent.type(screen.getByPlaceholderText('New Todo'), 'Estudar testes unitários');
 
+    fireEvent.click(screen.getByRole('button', { name: /add todo/i }));
 
-//   test('calls onAddTodo when form is submitted with valid input', async () => {
-//     const mockOnAddTodo = jest.fn();
+    await waitFor(() => {
+      expect(mockOnAddTodo).toHaveBeenCalledWith('Estudar testes unitários');
+    });
 
-//     await act(async () => {
-//       render(<FormTodo onAddTodo={mockOnAddTodo} />);
+    expect(screen.getByPlaceholderText('New Todo')).toHaveValue('');
+  });
 
-//       screen.debug();
+  test('não exibe mensagem de erro quando o campo é preenchido corretamente', async () => {
+    render(<FormTodo onAddTodo={mockOnAddTodo} />);
 
-//       const input = document.querySelector('input[name="newTodo"]');
+    userEvent.type(screen.getByPlaceholderText('New Todo'), 'Aprender Formik e Yup');
 
-//       // Simula digitação no campo de texto
-//       fireEvent.change(screen.getByPlaceholderText('New Todo'), {
-//         target: { value: 'Learn Testing' },
-//       });
+    fireEvent.click(screen.getByRole('button', { name: /add todo/i }));
 
+    expect(screen.queryByText('Todo is required!')).not.toBeInTheDocument();
+  });
 
-//       // Simula o clique no botão de submissão
-//       fireEvent.click(screen.getByRole('button', { name: /add todo/i }));
-//     });
-
-//     // Verifica se a função onAddTodo foi chamada
-//     expect(mockOnAddTodo).toHaveBeenCalledWith('Learn Testing');
-//   });
 });

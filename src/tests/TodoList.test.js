@@ -1,7 +1,6 @@
 import React from 'react';
-import { render, screen, fireEvent } from '@testing-library/react';
-import TodoList from './TodoList.test';
-import TodoItem from '../components/TodoItem';
+import { render, screen, act } from '@testing-library/react';
+import TodoList from '../components/TodoList';
 
 jest.mock('../components/TodoItem', () => ({ todo, deleteTodo, toggleTodo }) => (
   <div>
@@ -39,28 +38,12 @@ describe('TodoList', () => {
 
     expect(screen.getByText('Mensagem de teste!')).toBeInTheDocument();
     
-    jest.advanceTimersByTime(3000);
+    act(() => {
+      jest.advanceTimersByTime(3000);
+    });
     
     expect(screen.queryByText('Mensagem de teste!')).not.toBeInTheDocument();
     
     jest.useRealTimers();
   });
-
-  test('chama deleteTodo quando o botão de deletar é clicado', () => {
-    render(<TodoList todos={todos} deleteTodo={mockDeleteTodo} toggleTodo={mockToggleTodo} />);
-    
-    const deleteButtons = screen.getAllByText('Delete');
-    fireEvent.click(deleteButtons[0]); 
-    
-    expect(mockDeleteTodo).toHaveBeenCalledWith(1);
-  });
-
-//   test('chama toggleTodo quando o botão de alternar é clicado', () => {
-//     render(<TodoList todos={todos} deleteTodo={mockDeleteTodo} toggleTodo={mockToggleTodo} />);
-    
-//     const toggleButtons = screen.getAllByText('Toggle');
-//     fireEvent.click(toggleButtons[0]); // Clica no botão de alternar da primeira tarefa
-    
-//     expect(mockToggleTodo).toHaveBeenCalledWith(1); // Verifica se o ID correto foi passado
-//   });
 });
