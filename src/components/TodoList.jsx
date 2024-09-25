@@ -4,12 +4,12 @@ import { List, ListSubheader } from "@react-md/list";
 
 const TodoList = ({ todos, deleteTodo, toggleTodo, message }) => {
   const [displayMessage, setDisplayMessage] = useState(message);
-  
+
   useEffect(() => {
     if (message) {
       const timer = setTimeout(() => {
         setDisplayMessage('');
-      }, 3000); 
+      }, 3000);
 
       return () => clearTimeout(timer);
     }
@@ -17,7 +17,7 @@ const TodoList = ({ todos, deleteTodo, toggleTodo, message }) => {
 
   return (
     <List>
-        <ListSubheader> {displayMessage} </ListSubheader>
+        {displayMessage && <ListSubheader className='display-message'> {displayMessage} </ListSubheader>}
         {todos.map(todo => (
           <TodoItem
             key={todo.id}

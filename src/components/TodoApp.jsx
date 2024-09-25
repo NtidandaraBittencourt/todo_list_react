@@ -4,7 +4,7 @@ import { collection, getDocs, addDoc, doc, deleteDoc, updateDoc  } from 'firebas
 import TodoList from './TodoList';
 import FormTodo from './FormTodo';
 import { Divider } from "@react-md/divider";
-import Loading from '../Shared/Loading';
+import LoadingTodo from '../Shared/LoadingTodo';
 
 class TodoApp extends Component {
   state = {
@@ -72,7 +72,7 @@ class TodoApp extends Component {
         <Divider className='divider'/>
       
         {this.state.loading ? (
-          <Loading />
+          <LoadingTodo />
         ) : (
           <TodoList
             todos={this.state.todos}
