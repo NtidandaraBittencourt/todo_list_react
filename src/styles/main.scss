@@ -6,7 +6,8 @@
   $rmd-theme-primary: color.$rmd-pink-50,
   $rmd-theme-secondary: color.$rmd-pink-a-200,
   $rmd-theme-on-primary: color.$rmd-pink-300,
-  $rmd-theme-on-secondary: color.$rmd-blue-grey-800
+  $rmd-theme-on-secondary: color.$rmd-blue-grey-800,
+  $rmd-progress-color: #140417,
 );
 
 body {
@@ -45,6 +46,14 @@ body {
         background-color: $rmd-theme-on-primary;
         color: $rmd-theme-primary;
       }      
+    }
+
+    .loading-container {
+      color: $rmd-progress-color;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 300px; 
     }
   }
 

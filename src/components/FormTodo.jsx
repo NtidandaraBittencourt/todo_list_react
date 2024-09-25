@@ -1,26 +1,50 @@
 import React from 'react';
-import {
-  Form,
-  TextField,
-} from "@react-md/form";
-import { Button  } from 'react-md';
+import { Formik, Form, Field, ErrorMessage } from 'formik';
+import * as Yup from 'yup';
+import { TextField } from "@react-md/form";
+import { Button } from 'react-md';
 
+const validationSchema = Yup.object().shape({
+  newTodo: Yup.string()
+    .trim()
+    .required('Todo is required!'),
+});
 
-const FormTodo = ({ newTodo, onInputChange, onAddTodo }) => {
-
+const FormTodo = ({ onAddTodo }) => {
   return (
-    <Form className="form-todo">
-      <TextField
-        type="text"
-        value={newTodo}
-        onChange={(e) => onInputChange(e.target.value)}
-        placeholder="New Todo"
-        theme='outline'
-        
-      />
-      <Button onClick={onAddTodo} theme="secondary" themeType="contained">Add Todo</Button>
-    </Form>
-  )
-}
+    <Formik
+      initialValues={{ newTodo: '' }}
+      validationSchema={validationSchema}
+      onSubmit={(values, { resetForm }) => {
+        onAddTodo(values.newTodo);
+        resetForm();
+      }}
+    >
+      {({ handleChange, handleBlur }) => (
+        <Form className="form-todo">
+          <Field name="newTodo">
+            {({ field }) => (
+              <TextField
+                {...field}
+                type="text"
+                placeholder="New Todo"
+                theme="outline"
+                error={!!field.error}
+                onChange={handleChange}
+                onBlur={handleBlur}
+              />
+            )}
+          </Field>
+          <ErrorMessage name="newTodo">
+            {(msg) => <div style={{ color: 'red' }}>{msg}</div>}
+          </ErrorMessage>
+          <Button type="submit" theme="secondary" themeType="contained">
+            Add Todo
+          </Button>
+        </Form>
+      )}
+    </Formik>
+  );
+};
 
 export default FormTodo;
