@@ -49,16 +49,16 @@ src/
 
 ### Passos para rodar localmente
 
-git clone https://github.com/NtidandaraBittencourt/todo_list_react
-cd todo_list_react
+- git clone https://github.com/NtidandaraBittencourt/todo_list_react
+- cd todo_list_react
 
 #### Instale as dependencias e rode a aplicação
 
-npm install
-npm start
+- npm install
+- npm start
 
 
 #### Rodar os testes
 
-npm test
+- npm test
 
